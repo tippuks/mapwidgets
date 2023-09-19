@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Search Widget</title>
+        <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+        <script src="https://js.arcgis.com/3.20/"></script>
+        <script>
+            
+            require([
+            "esri/map",
+            "esri/dijit/BasemapToggle",
+            "esri/dijit/LocateButton",
+            "esri/dijit/HomeButton",
+            "esri/dijit/Search",
+            "dojo/domReady!"
+            ], function(
+            Map,
+            BasemapToggle,
+            LocateButton,
+            HomeButton,
+            Search
+            ) {
+
+            var map = new Map("map1", {
+            center: [78.491684, 17.387140],
+            zoom: 12,
+            basemap: "streets"
+            });
+            var search = new Search({
+            map: map,
+            enableButtonMode: true,
+            enableHighlight: true,
+            enableLabel: true
+            }, "search");
+            search.startup();
+            var home = new HomeButton({
+            map: map
+            }, "HomeButton");
+            home.startup();
+            var myLocation = new LocateButton({
+            map: map,
+            scale: 1000000,
+            centerAt: true
+            }, "LocateButton");
+            myLocation.startup();
+            var basemapToggle = new BasemapToggle({
+            map: map,
+            basemap: "satellite"
+            }, "BasemapToggle");
+            basemapToggle.startup();
+            });
+        </script>
+        <style>
+            html, body, #map1 {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            }
+            #search {
+            display: block;
+            position: absolute;
+            z-index: 90;
+            top: 20px;
+            right: 20px;
+            }
+            #HomeButton {
+            position: absolute;
+            top: 95px;
+            left: 20px;
+            z-index: 50;
+            }
+            #LocateButton {
+            position: absolute;
+            top: 140px;
+            left: 20px;
+            z-index: 50;
+            }
+            #BasemapToggle {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            z-index: 5;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map1"></div>
+        <div id="search"></div>
+        <div id="HomeButton"></div>
+        <div id="LocateButton"></div>
+        <div id="BasemapToggle"></div>
+    </body>
+</html>
